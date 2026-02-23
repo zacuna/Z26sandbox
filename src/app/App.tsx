@@ -23,7 +23,7 @@ export default function App() {
     <div className="min-h-screen bg-black">
       <Sidebar activePage={activePage} onNavigate={setActivePage} />
       
-      <main className="ml-64 bg-black">
+      <main className="lg:ml-64 bg-black">
         {activePage === 'home' ? (
           <>
             {heroSections.map(({ id, label, component: Component }) => (

@@ -3,6 +3,7 @@ import { CaseIntroV2 } from './CaseIntroV2';
 import { CaseIntroV3 } from './CaseIntroV3';
 import { CaseIntroV4 } from './CaseIntroV4';
 import { CaseIntroV5 } from './CaseIntroV5';
+import { CaseIntroV6 } from './CaseIntroV6';
 
 export function CaseIntro() {
   const caseIntroSections = [
@@ -11,6 +12,7 @@ export function CaseIntro() {
     { id: 'v3', label: 'V3', component: CaseIntroV3 },
     { id: 'v4', label: 'V4', component: CaseIntroV4 },
     { id: 'v5', label: 'V5', component: CaseIntroV5 },
+    { id: 'v6', label: 'V6', component: CaseIntroV6 },
   ];
 
   return (

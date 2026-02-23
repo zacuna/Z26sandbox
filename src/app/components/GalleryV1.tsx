@@ -62,6 +62,7 @@ export function GalleryV1() {
       return {
         x: '0%',
         scale: 1.15,
+        scaleM: 1.0, // Mobile scale
         rotateY: 0,
         z: 0,
         opacity: 1,
@@ -72,8 +73,11 @@ export function GalleryV1() {
       // Right card - smaller, dimmer, more angled, blurred
       return {
         x: '70%',
+        xM: '45%', // Mobile x position
         scale: 0.75,
+        scaleM: 0.65, // Mobile scale
         rotateY: -35,
+        rotateYM: -25, // Mobile rotation
         z: -200,
         opacity: 0.4,
         zIndex: 2,
@@ -83,8 +87,11 @@ export function GalleryV1() {
       // Left card - smaller, dimmer, more angled, blurred
       return {
         x: '-70%',
+        xM: '-45%', // Mobile x position
         scale: 0.75,
+        scaleM: 0.65, // Mobile scale
         rotateY: 35,
+        rotateYM: 25, // Mobile rotation
         z: -200,
         opacity: 0.4,
         zIndex: 2,
@@ -94,8 +101,11 @@ export function GalleryV1() {
       // Hidden cards
       return {
         x: position < images.length / 2 ? '100%' : '-100%',
+        xM: position < images.length / 2 ? '100%' : '-100%',
         scale: 0.6,
+        scaleM: 0.5,
         rotateY: 0,
+        rotateYM: 0,
         z: -400,
         opacity: 0,
         zIndex: 1,
@@ -105,27 +115,27 @@ export function GalleryV1() {
   };
 
   return (
-    <section className="min-h-screen bg-zinc-950 flex items-center justify-center px-8 py-24">
+    <section className="min-h-screen bg-zinc-950 flex items-center justify-center px-4 md:px-8 py-12 md:py-24">
       <div className="w-full max-w-6xl">
         {/* Carousel container */}
-        <div className="relative h-[700px] perspective-[2000px]">
+        <div className="relative h-[400px] md:h-[500px] lg:h-[700px] perspective-[1200px] md:perspective-[2000px]">
           <AnimatePresence initial={false}>
             {images.map((image, index) => {
               const style = getCardStyle(index);
               return (
                 <motion.div
                   key={index}
-                  className="absolute left-1/2 top-1/2 w-[700px] h-[500px] cursor-pointer"
+                  className="absolute left-1/2 top-1/2 w-[280px] h-[200px] md:w-[500px] md:h-[350px] lg:w-[700px] lg:h-[500px] cursor-pointer"
                   style={{
                     transformStyle: 'preserve-3d',
                     x: '-50%',
                   }}
                   initial={false}
                   animate={{
-                    translateX: style.x,
+                    translateX: window.innerWidth < 768 ? style.xM || style.x : style.x,
                     y: '-50%',
-                    scale: style.scale,
-                    rotateY: style.rotateY,
+                    scale: window.innerWidth < 768 ? style.scaleM || style.scale : style.scale,
+                    rotateY: window.innerWidth < 768 ? style.rotateYM || style.rotateY : style.rotateY,
                     z: style.z,
                     opacity: style.opacity,
                     zIndex: style.zIndex,
@@ -145,7 +155,7 @@ export function GalleryV1() {
                   }}
                   onWheel={handleWheel}
                 >
-                  <div className="w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-zinc-900">
+                  <div className="w-full h-full rounded-xl md:rounded-2xl overflow-hidden shadow-2xl bg-zinc-900">
                     <ImageWithFallback
                       src={image}
                       alt={`Gallery image ${index + 1}`}
@@ -159,12 +169,12 @@ export function GalleryV1() {
         </div>
 
         {/* Navigation controls */}
-        <div className="flex items-center justify-center gap-6 mt-12">
+        <div className="flex items-center justify-center gap-4 md:gap-6 mt-8 md:mt-12">
           <button
             onClick={handlePrevious}
-            className="p-3 rounded-full bg-zinc-800 text-white hover:bg-zinc-700 transition-colors"
+            className="p-2 md:p-3 rounded-full bg-zinc-800 text-white hover:bg-zinc-700 transition-colors"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
           </button>
           
           <div className="flex gap-2">
@@ -174,7 +184,7 @@ export function GalleryV1() {
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all ${
                   index === currentIndex
-                    ? 'bg-white w-8'
+                    ? 'bg-white w-6 md:w-8'
                     : 'bg-zinc-600 hover:bg-zinc-500'
                 }`}
               />
@@ -183,9 +193,9 @@ export function GalleryV1() {
 
           <button
             onClick={handleNext}
-            className="p-3 rounded-full bg-zinc-800 text-white hover:bg-zinc-700 transition-colors"
+            className="p-2 md:p-3 rounded-full bg-zinc-800 text-white hover:bg-zinc-700 transition-colors"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
           </button>
         </div>
       </div>

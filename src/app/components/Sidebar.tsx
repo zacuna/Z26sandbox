@@ -1,12 +1,13 @@
 interface SidebarProps {
-  activePage: 'home' | 'gallery';
-  onNavigate: (page: 'home' | 'gallery') => void;
+  activePage: 'home' | 'gallery' | 'case-intro';
+  onNavigate: (page: 'home' | 'gallery' | 'case-intro') => void;
 }
 
 export function Sidebar({ activePage, onNavigate }: SidebarProps) {
   const navItems = [
     { name: 'Home Hero', id: 'home' as const },
     { name: 'Gallery', id: 'gallery' as const },
+    { name: 'Case Intro', id: 'case-intro' as const },
   ];
 
   return (

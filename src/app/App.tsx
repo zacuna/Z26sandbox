@@ -5,10 +5,11 @@ import { HeroV3 } from './components/HeroV3';
 import { HeroV4 } from './components/HeroV4';
 import { HeroV5 } from './components/HeroV5';
 import { Gallery } from './components/Gallery';
+import { CaseIntro } from './components/CaseIntro';
 import { useState } from 'react';
 
 export default function App() {
-  const [activePage, setActivePage] = useState<'home' | 'gallery'>('home');
+  const [activePage, setActivePage] = useState<'home' | 'gallery' | 'case-intro'>('home');
 
   const heroSections = [
     { id: 'v2', label: 'V2', component: HeroV2 },
@@ -38,6 +39,8 @@ export default function App() {
               </div>
             ))}
           </>
+        ) : activePage === 'case-intro' ? (
+          <CaseIntro />
         ) : (
           <Gallery />
         )}

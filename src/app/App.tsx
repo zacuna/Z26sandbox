@@ -6,10 +6,13 @@ import { HeroV4 } from './components/HeroV4';
 import { HeroV5 } from './components/HeroV5';
 import { Gallery } from './components/Gallery';
 import { CaseIntro } from './components/CaseIntro';
+import { Space } from './components/Space';
+import { Europa } from './components/Europa';
+import { StorySection } from './components/StorySection';
 import { useState } from 'react';
 
 export default function App() {
-  const [activePage, setActivePage] = useState<'home' | 'gallery' | 'case-intro'>('home');
+  const [activePage, setActivePage] = useState<'home' | 'gallery' | 'case-intro' | 'space' | 'europa' | 'story-section'>('home');
 
   const heroSections = [
     { id: 'v2', label: 'V2', component: HeroV2 },
@@ -41,9 +44,15 @@ export default function App() {
           </>
         ) : activePage === 'case-intro' ? (
           <CaseIntro />
-        ) : (
+        ) : activePage === 'space' ? (
+          <Space />
+        ) : activePage === 'gallery' ? (
           <Gallery />
-        )}
+        ) : activePage === 'europa' ? (
+          <Europa />
+        ) : activePage === 'story-section' ? (
+          <StorySection />
+        ) : null}
       </main>
     </div>
   );

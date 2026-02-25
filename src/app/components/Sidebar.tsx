@@ -2,8 +2,8 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 interface SidebarProps {
-  activePage: 'home' | 'gallery' | 'case-intro';
-  onNavigate: (page: 'home' | 'gallery' | 'case-intro') => void;
+  activePage: 'home' | 'gallery' | 'case-intro' | 'space' | 'europa' | 'story-section';
+  onNavigate: (page: 'home' | 'gallery' | 'case-intro' | 'space' | 'europa' | 'story-section') => void;
 }
 
 export function Sidebar({ activePage, onNavigate }: SidebarProps) {
@@ -13,6 +13,9 @@ export function Sidebar({ activePage, onNavigate }: SidebarProps) {
     { name: 'Home Hero', id: 'home' as const },
     { name: 'Gallery', id: 'gallery' as const },
     { name: 'Case Intro', id: 'case-intro' as const },
+    { name: 'Story Section', id: 'story-section' as const },
+    { name: 'Space', id: 'space' as const },
+    { name: 'Europa', id: 'europa' as const },
   ];
 
   const handleNavigate = (page: typeof navItems[number]['id']) => {
